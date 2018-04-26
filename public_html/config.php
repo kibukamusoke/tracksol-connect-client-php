@@ -24,9 +24,9 @@ $_CONFIG = array(
     ),
     'CONNECT' => array(
         'HOST' => 'http://172.17.0.1:8000/',
-        'MOUNT' => 'connect',
-        'APP_ID' => 'connect',
-        'MASTER_KEY' => 'connect@#123'
+        'MOUNT' => '{parse_mount}',
+        'APP_ID' => '{app_id}',
+        'MASTER_KEY' => '{master_key}'
     ),
     'TABLES' => array (
         'card' => 'Connect.card',
