@@ -1,0 +1,17 @@
+RewriteEngine on
+
+
+RewriteRule ^icard/(.*)/modify$ icard.php?cardNo=$1&action=modify
+RewriteRule ^cards/res/(.*)/(.*)?$ cards.php?success=$1&entr=$2
+RewriteRule ^cards/(.*)/(.*)$ cards.php?cardNo=$1&action=$2
+
+RewriteRule ^icustomer/(.*)/modify$ icustomer.php?idx=$1&action=modify
+RewriteRule ^customers/res/(.*)/(.*)?$ customers.php?success=$1&entr=$2
+RewriteRule ^customers/(.*)/(.*)$ customers.php?idx=$1&action=$2
+
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^(.*)$ $1.php [NC,L]

@@ -1,0 +1,20 @@
+
+version: '2'
+services:
+  php-apache:
+    image: kibukamusoke/connect-php-client:latest
+    ports:
+      - "8002:80"
+    volumes:
+      - ./public_html:/var/www/html
+
+  db:
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: connect12366123
+    volumes:
+      - ./db-data:/var/lib/mysql
