@@ -10,7 +10,7 @@ require_once './libs/parse/autoload.php';
 ob_start();
 session_start();
 
-$site_url = 'http://http://mmpuchong.mobile-money.com.my:8002';
+$site_url = 'http://mmpuchong.mobile-money.com.my:8002';
 $_CONFIG = array(
     'ENVIRONMENT' => 'production', /* development | production */
     'Database' => array( // mysql or postgre

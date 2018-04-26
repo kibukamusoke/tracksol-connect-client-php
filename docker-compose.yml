@@ -14,7 +14,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_USERNAME: root
-      MYSQL_ROOT_PASSWORD: connect12366123
+      MYSQL_ROOT_USERNAME: {mysql_username}
+      MYSQL_ROOT_PASSWORD: {mysql_password}
     volumes:
       - ./db-data:/var/lib/mysql
