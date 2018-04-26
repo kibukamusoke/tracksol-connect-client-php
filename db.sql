@@ -71,6 +71,22 @@ create table nwsc_customer
 ;
 
 USE MWSC;
+create table nwsc_customer
+(
+  idx bigint auto_increment
+    primary key,
+  customer_name varchar(200) not null,
+  customer_number varchar(50) null,
+  property_number varchar(200) null,
+  meter_number varchar(50) null,
+  status int default '0' not null,
+  createdAt datetime default CURRENT_TIMESTAMP null,
+  updatedAt datetime null,
+  updatedBy varchar(100) null,
+  constraint nwsc_customer_idx_uindex
+  unique (idx)
+)
+;
 
 create table nwsc_meter_reading
 (
@@ -86,23 +102,6 @@ create table nwsc_meter_reading
   updated_dt datetime null,
   updated_by varchar(100) null,
   constraint nwsc_meter_readings_idx_uindex
-  unique (idx)
-)
-;
-
-create table nwsc_staff
-(
-  idx bigint auto_increment
-    primary key,
-  staff_name varchar(200) not null,
-  card_no varchar(20) null,
-  staff_type int default '1' null,
-  status int default '0' null,
-  created_dt datetime default CURRENT_TIMESTAMP null,
-  created_by varchar(200) null,
-  updated_dt datetime null,
-  updated_by varchar(200) null,
-  constraint nwsc_staff_idx_uindex
   unique (idx)
 )
 ;
@@ -241,9 +240,9 @@ create procedure tracksol_switch (IN sqlObj json, OUT response varchar(4000))
     THEN -- meter reading
 
       SET cardNo = p2;
-      SELECT `staff_name`
-      FROM nwsc_staff
-      WHERE `card_no` = cardNo AND `status` = 0
+      SELECT `name`
+      FROM Connect.card
+      WHERE `cardNo` = cardNo AND `status` = 0
       INTO staffName;
 
 
