@@ -52,7 +52,7 @@ create table product_list
 ;
 
 
-
+USE MWSC;
 create table nwsc_customer
 (
   idx bigint auto_increment
@@ -70,7 +70,7 @@ create table nwsc_customer
 )
 ;
 
-USE MWSC;
+
 create table nwsc_customer
 (
   idx bigint auto_increment
