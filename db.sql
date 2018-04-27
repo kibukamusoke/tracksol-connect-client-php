@@ -15,6 +15,19 @@ create table card
 )
 ;
 
+create table online_data_log
+(
+  idx bigint auto_increment
+    primary key,
+  data json null,
+  response json null,
+  startTime datetime default CURRENT_TIMESTAMP not null,
+  endTime datetime null,
+  constraint online_data_log_idx_uindex
+  unique (idx)
+)
+;
+
 create table product
 (
   product_id bigint auto_increment
@@ -48,74 +61,6 @@ create table product_list
   updatedBy varchar(100) null,
   constraint product_list_list_id_uindex
   unique (list_id)
-)
-;
-
-
-USE MWSC;
-create table nwsc_customer
-(
-  idx bigint auto_increment
-    primary key,
-  customer_name varchar(200) not null,
-  customer_number varchar(50) null,
-  property_number varchar(200) null,
-  meter_number varchar(50) null,
-  status int default '0' not null,
-  createdAt datetime default CURRENT_TIMESTAMP null,
-  updatedAt datetime null,
-  updatedBy varchar(100) null,
-  constraint nwsc_customer_idx_uindex
-  unique (idx)
-)
-;
-
-
-create table nwsc_customer
-(
-  idx bigint auto_increment
-    primary key,
-  customer_name varchar(200) not null,
-  customer_number varchar(50) null,
-  property_number varchar(200) null,
-  meter_number varchar(50) null,
-  status int default '0' not null,
-  createdAt datetime default CURRENT_TIMESTAMP null,
-  updatedAt datetime null,
-  updatedBy varchar(100) null,
-  constraint nwsc_customer_idx_uindex
-  unique (idx)
-)
-;
-
-create table nwsc_meter_reading
-(
-  idx bigint auto_increment
-    primary key,
-  seq_id bigint not null,
-  meter_number varchar(50) not null,
-  customer_name varchar(200) null,
-  meter_reading decimal null,
-  customer_id bigint null,
-  created_dt datetime default CURRENT_TIMESTAMP null,
-  created_by varchar(100) null,
-  updated_dt datetime null,
-  updated_by varchar(100) null,
-  constraint nwsc_meter_readings_idx_uindex
-  unique (idx)
-)
-;
-
-create table online_data_log
-(
-  idx bigint auto_increment
-    primary key,
-  data json null,
-  response json null,
-  startTime datetime default CURRENT_TIMESTAMP not null,
-  endTime datetime null,
-  constraint online_data_log_idx_uindex
-  unique (idx)
 )
 ;
 
@@ -242,7 +187,7 @@ create procedure tracksol_switch (IN sqlObj json, OUT response varchar(4000))
       SET cardNo = p2;
       SELECT `name`
       FROM Connect.card
-      WHERE `cardNo` = cardNo AND `status` = 0
+      WHERE `cardNo` = cardNo AND `status` = 0 LIMIT 1
       INTO staffName;
 
 
@@ -269,8 +214,8 @@ create procedure tracksol_switch (IN sqlObj json, OUT response varchar(4000))
       SELECT
         idx,
         customer_name
-      FROM nwsc_customer
-      WHERE customer_number = customerPhone
+      FROM NWSC.nwsc_customer
+      WHERE customer_number = customerPhone LIMIT 1
       INTO customerId, customerName;
 
       IF (COALESCE(customerId, 0) = 0)
@@ -289,7 +234,7 @@ create procedure tracksol_switch (IN sqlObj json, OUT response varchar(4000))
 
       END IF;
 
-      INSERT INTO nwsc_meter_reading (seq_id, meter_number, customer_name, meter_reading, customer_id, created_dt, created_by)
+      INSERT INTO NWSC.nwsc_meter_reading (seq_id, meter_number, customer_name, meter_reading, customer_id, created_dt, created_by)
       VALUES (seq, meterNo, customerName, meterReading, customerId, current_timestamp, staffName);
 
       SET printString =
