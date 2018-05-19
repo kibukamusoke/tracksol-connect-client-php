@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="0669a2a8-b707-4d05-aea3-650e452fcae1" name="TDOCKER-MY" url="http://TDOCKER-MY">
-        <fileTransfer host="TDOCKER-MY" port="22" rootFolder="/home/connect/containers/54908/connect-client-php" accessType="SFTP">
+        <fileTransfer host="TDOCKER-MY" port="22" rootFolder="/home/connect/containers/Picklist-Pharma/connect-client-php" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

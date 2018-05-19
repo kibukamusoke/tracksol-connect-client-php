@@ -36,7 +36,7 @@
                         <a href="<?php echo $site_url;?>/icard" class="dropdown-item">Add New</a>
                     </div>
                 </li>
-                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+                <!--<li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
                                         class="nav-link dropdown-toggle"><i class="fa big-icon fa-users"></i> <span
                                 class="mini-dn">Customers</span> <span class="indicator-right-menu mini-dn"><i
                                     class="fa indicator-mn fa-angle-left"></i></span></a>
@@ -51,6 +51,19 @@
                                     class="fa indicator-mn fa-angle-left"></i></span></a>
                     <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                         <a href="<?php echo $site_url;?>/meter-readings" class="dropdown-item">View All</a>
+                    </div>
+                </li> -->
+
+                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+                                        class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span
+                                class="mini-dn">Picklist</span> <span class="indicator-right-menu mini-dn"><i
+                                    class="fa indicator-mn fa-angle-left"></i></span></a>
+                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                        <a href="<?php echo $site_url;?>/picklist-collections" class="dropdown-item">Actions</a>
+                        <a href="<?php echo $site_url;?>/picklist-locations" class="dropdown-item">Locations</a>
+                        <a href="<?php echo $site_url;?>/picklist-forms" class="dropdown-item">Forms</a>
+                        <a href="<?php echo $site_url;?>/picklists" class="dropdown-item">Picklists</a>
+                        <a href="<?php echo $site_url;?>/picklist-log" class="dropdown-item">Pick Log</a>
                     </div>
                 </li>
             </ul>

@@ -1,5 +1,14 @@
 RewriteEngine on
 
+<filesMatch "\.(html|htm|js|css)$">
+  FileETag None
+  <ifModule mod_headers.c>
+     Header unset ETag
+     Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+     Header set Pragma "no-cache"
+     Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+  </ifModule>
+</filesMatch>
 
 RewriteRule ^icard/(.*)/modify$ icard.php?cardNo=$1&action=modify
 RewriteRule ^cards/res/(.*)/(.*)?$ cards.php?success=$1&entr=$2
@@ -9,9 +18,29 @@ RewriteRule ^icustomer/(.*)/modify$ icustomer.php?idx=$1&action=modify
 RewriteRule ^customers/res/(.*)/(.*)?$ customers.php?success=$1&entr=$2
 RewriteRule ^customers/(.*)/(.*)$ customers.php?idx=$1&action=$2
 
+RewriteRule ^ipicklist-collection/(.*)/modify$ ipicklist-collection.php?idx=$1&action=modify
+RewriteRule ^picklist-collections/res/(.*)/(.*)?$ picklist-collections.php?success=$1&entr=$2
+RewriteRule ^picklist-collections/(.*)/(.*)$ picklist-collections.php?idx=$1&action=$2
 
+RewriteRule ^ipicklist-location/(.*)/modify$ ipicklist-location.php?idx=$1&action=modify
+RewriteRule ^picklist-locations/res/(.*)/(.*)?$ picklist-locations.php?success=$1&entr=$2
+RewriteRule ^picklist-locations/(.*)/(.*)$ picklist-locations.php?idx=$1&action=$2
+
+RewriteRule ^ipicklist-form/(.*)/modify$ ipicklist-form.php?idx=$1&action=modify
+RewriteRule ^ipicklist-form/res/(.*)/(.*)?$ picklist-forms.php?success=$1&entr=$2
+RewriteRule ^picklist-forms/(.*)/(.*)$ picklist-forms.php?idx=$1&action=$2
+
+RewriteRule ^ipicklist/(.*)/modify$ ipicklist.php?idx=$1&action=modify
+RewriteRule ^ipicklist/res/(.*)/(.*)?$ picklists.php?success=$1&entr=$2
+RewriteRule ^picklists/(.*)/(.*)$ picklists.php?idx=$1&action=$2
+
+RewriteRule ^picklist-log/(.*)/(.*)$ picklist-log.php?idx=$1&action=$2
+
+RewriteRule ^modal-submit$ modal-submit.php
+RewriteRule ^upload$ upload.php
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
+
 
 RewriteRule ^(.*)$ $1.php [NC,L]

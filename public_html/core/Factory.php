@@ -8,6 +8,7 @@
 
 include_once ('Connect.php');
 include_once ('NWSC.php');
+include_once ('Picklist.php');
 
 class Factory
 {
@@ -18,6 +19,10 @@ class Factory
 
     public static function NWSC($CLASSES) {
         return new NWSC($CLASSES);
+    }
+
+    public static function Picklist($CLASSES) {
+        return new Picklist($CLASSES, self::Connect($CLASSES));
     }
 
 

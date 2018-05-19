@@ -53,6 +53,7 @@ if($health['status'] === 200) {
 /********************** INITIALIZE PARSE DONE **********************************/
 
 
+
 /********************** INITIALIZE CLASSES ***************************************/
 
 require_once 'core/DatabaseMYSQL.php';
@@ -77,7 +78,7 @@ switch($_CONFIG['Database']['DB']) {
 $__DB->connect();
 $__DB->select_db();
 $__Sec 	= new Security($__DB);
-$__GB 	= new General($__DB,$__Sec);
+$__GB 	= new General($__DB,$__Sec, $_CONFIG['CONSTANTS']);
 
 $_CLASSES = array(
     'DB' => $__DB,
@@ -89,8 +90,16 @@ $_CLASSES = array(
 // manufacture class instances
 $__CONNECT = Factory::Connect($_CLASSES);
 
+/********************** CHECK SESSION ******************************************/
+
+//$__CONNECT->checkLogin();
+
+/********************** CHECK SESSION DONE******************************************/
+
 // non standard inits
 $__NWSC = Factory::NWSC($_CLASSES);
+
+$__PICKLIST = Factory::Picklist($_CLASSES);
 
 /********************** INITIALIZE CLASSES DONE **********************************/
 

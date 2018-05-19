@@ -37,7 +37,9 @@ class Connect
         $this->cards_class = 'TerminalCard';
         $this->tables = $__CLASSES['TABLES'];
 
+
     }
+
 
     function signUp()
     {
@@ -65,6 +67,23 @@ class Connect
     function getProductLists()
     {
         $query = new ParseQuery('TerminalList');
+    }
+
+    function getPicklistCollections() {
+        $query = new ParseQuery('PicklistCollection');
+        $query->equalTo('status', 0);
+        $query->ascending('name');
+        return $query->find();
+    }
+
+    function getStaffCards($cardNo = null) {
+        $query = new ParseQuery('TerminalCard');
+        $query->equalTo('status', 0);
+        if(!empty($cardNo)) {
+            $query->equalTo('cardNo', $cardNo);
+        }
+        $query->ascending('name');
+        return $query->find();
     }
 
     function adminLogOut()
@@ -151,6 +170,28 @@ class Connect
         try {
             $cardObject->save();
             return array('success' => true, 'message' => 'Card Stored Successfully.');
+        } catch (ParseException $ex) {
+            return $this->handleParseError($ex);
+        }
+    }
+
+    public function updatePicklistCollection($data)
+    {
+        // call cloud code to upsert collection
+        try {
+            $results = ParseCloud::run("updatePicklistCollection", $data);
+            return array('success' => true, 'message' => $results);
+        } catch (ParseException $ex) {
+            return $this->handleParseError($ex);
+        }
+    }
+
+    public function createPicklistCollection($data)
+    {
+        // call cloud code to upsert collection
+        try {
+            $results = ParseCloud::run("createPicklistCollection", $data);
+            return array('success' => true, 'message' => $results);
         } catch (ParseException $ex) {
             return $this->handleParseError($ex);
         }

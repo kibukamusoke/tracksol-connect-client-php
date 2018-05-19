@@ -28,12 +28,15 @@ if (isset($_POST['cardNo']) && isset($_POST['type']) && isset($_POST['name'])) {
 $editable = array('cardNo' => '', 'name' => '', 'type' => 1);
 if(isset($_GET['cardNo']) && isset($_GET['action']) && $_GET['action'] == 'modify') {
     $cardNo = $__DB->escape_string($_GET['cardNo']);
-    $query = $__DB->select($_CLASSES['TABLES']['card'], '*', 'cardNo = ' . '\''. $cardNo .'\' AND status = 0', null, 1);
-    $result = $__DB->fetch_object($query);
-    if($result){
-        $editable['cardNo'] = $result->cardNo;
-        $editable['name'] = $result->name;
-        $editable['type'] = $result->type;
+    // $query = $__DB->select($_CLASSES['TABLES']['card'], '*', 'cardNo = ' . '\''. $cardNo .'\' AND status = 0', null, 1);
+    // $result = $__DB->fetch_object($query);
+    $cards = $__CONNECT->getStaffCards($cardNo);
+
+    if(sizeof($cards) > 0){
+        $card = $cards[0];
+        $editable['cardNo'] = $card->get('cardNo');
+        $editable['name'] = $card->get('name');
+        $editable['type'] = $card->get('type');
     }
 
 

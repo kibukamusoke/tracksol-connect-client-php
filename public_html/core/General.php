@@ -10,11 +10,13 @@ class General
 {
 
     public $__DB, $__SEC;
+    private $constants;
 
-    function __construct($__DB, $__SEC)
+    function __construct($__DB, $__SEC, $CONSTANTS)
     {
         $this->__DB = $__DB;
         $this->__SEC = $__SEC;
+        $this->constants = $CONSTANTS;
     }
 
     public function prepareMessage($array)
@@ -38,10 +40,13 @@ class General
         return $this->__DB->num_rows($query);
     }
 
-    public function b64encode($string){
+    public function b64encode($string)
+    {
         return urlencode(base64_encode($string));
     }
-    public function b64decode($string){
+
+    public function b64decode($string)
+    {
         return urldecode(base64_decode($string));
     }
 
@@ -106,9 +111,10 @@ class General
         }
     }
 
-    public function randomNumber($length) {
+    public function randomNumber($length)
+    {
         $result = '';
-        for($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; $i++) {
             $result .= mt_rand(0, 9);
         }
         return $result;
@@ -139,9 +145,23 @@ class General
         }
         $msg = '<script type="text/javascript">';
         $msg .= 'window.onload = function( ) {';
-        $msg .= "DisplayError(".$error_type.",'".$error."');";
+        $msg .= "DisplayError(" . $error_type . ",'" . $error . "');";
         $msg .= '}</script>';
         return $msg;
     }
+
+    function slack($message)
+    {
+        $message = array('payload' => json_encode(array('text' => $message)));
+        $c = curl_init($this->constants['slack_url']);
+        curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($c, CURLOPT_POST, true);
+        curl_setopt($c, CURLOPT_POSTFIELDS, $message);
+        $result = curl_exec($c);
+        curl_close($c);
+
+        return $result;
+    }
+
 
 }

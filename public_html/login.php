@@ -12,6 +12,8 @@ $error = '';
 if (isset($_POST['username'], $_POST['password'])) {
     //print_r($_POST);
     $error = $__CONNECT->adminLogin($_POST);
+
+    //echo $__GB->DisplayError($error, 'red');
 }
 
 if (isset($_SESSION['admin'])) {

@@ -194,7 +194,8 @@ if(isset($_GET['idx']) && isset($_GET['action']) && $_GET['action'] == 'modify')
     </div>
 </div>
 
+
+
 <?
 require_once 'footer.php';
 ?>
-

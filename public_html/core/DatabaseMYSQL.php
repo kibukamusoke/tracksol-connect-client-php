@@ -8,7 +8,7 @@
 
 class DatabaseMYSQL{
     public $connect, $query;
-    private $DB_host, $DB_user, $DB_pass, $DB_name;
+    private $DB_host, $DB_user, $DB_pass, $DB_name, $DB_port;
     public $DB_prefix;
     // Construct the information do we need
     public function __construct($_config)
@@ -18,14 +18,17 @@ class DatabaseMYSQL{
         $this->DB_user 	= $_config['DB_user'];
         $this->DB_pass 	= $_config['DB_pass'];
         $this->DB_name 	= $_config['DB_name'];
+        $this->DB_port 	= $_config['DB_port'];
     }
     // The Conection function
     public function connect()
     {
-        $this->connect = @mysqli_connect($this->DB_host, $this->DB_user, $this->DB_pass, 'NWSC');
+
+        $this->connect = @mysqli_connect($this->DB_host, $this->DB_user, $this->DB_pass, $this->DB_name, $this->DB_port);
         if(!$this->connect)
         {
-            die('Can\'t Connect The Server');
+            //die('Can\'t Connect The Server');
+            printf("Connect failed: %s\n", mysqli_connect_error());
         }else{
             $this->query("SET NAMES 'utf8'");
         }
@@ -132,5 +135,6 @@ class DatabaseMYSQL{
     {
         return mysqli_insert_id($this->connect);
     }
+
 }
 ?>

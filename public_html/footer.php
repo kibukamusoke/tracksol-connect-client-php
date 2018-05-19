@@ -73,6 +73,11 @@
 <script src="<?php echo $site_url;?>/assets/js/data-table/bootstrap-table-resizable.js"></script>
 <script src="<?php echo $site_url;?>/assets/js/data-table/colResizable-1.5.source.js"></script>
 <script src="<?php echo $site_url;?>/assets/js/data-table/bootstrap-table-export.js"></script>
+
+<!-- dropzone JS
+    ============================================ -->
+<script src="<?php echo $site_url;?>/assets/js/dropzone.js"></script>
+
 <!-- main JS
     ============================================ -->
 <script src="<?php echo $site_url;?>/assets/js/main.js"></script>

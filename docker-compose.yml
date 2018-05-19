@@ -4,7 +4,7 @@ services:
   php-apache:
     image: kibukamusoke/connect-php-client:latest
     ports:
-      - "8002:80"
+      - "8003:80"
     volumes:
       - ./public_html:/var/www/html
 
@@ -12,9 +12,12 @@ services:
     image: mysql
     restart: always
     ports:
-      - "3306:3306"
+      - "3308:3306"
     environment:
-      MYSQL_ROOT_USERNAME: {mysql_username}
-      MYSQL_ROOT_PASSWORD: {mysql_password}
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: connect12366123
     volumes:
       - ./db-data:/var/lib/mysql
+      - ./mysql_8_conf.d:/etc/mysql/conf.d
+
+

@@ -131,15 +131,16 @@ if(isset($_GET['cardNo']) && $_GET['action']) { //destroy card
                                 </thead>
                                 <tbody>
                                 <?php
-                                $query = $__DB->select($_CLASSES['TABLES']['card'], '`*`', '`status` = 0', 'createdAt DESC');
-                                while ($result = $__DB->fetch_assoc($query)) {
+                                //$query = $__DB->select($_CLASSES['TABLES']['card'], '`*`', '`status` = 0', 'createdAt DESC');
+                                $cards = $__CONNECT->getStaffCards();
+                                foreach ($cards as $result) {
                                     echo '<tr><td></td>';
-                                    echo '<td>' . $result['idx'] . '</td>';
-                                    echo '<td>' . $result['cardNo'] . '</td>';
-                                    echo '<td>' . ($result['type'] == 0 ? 'Supervisor' : 'Staff') . '</td>';
-                                    echo '<td>' . $result['name'] . '</td>';
-                                    echo '<td>' . $result['createdAt'] . '</td>';
-                                    echo '<td>' . '<a href="' . $site_url .'/icard/' . $result['cardNo'] . '/modify"><i class="fa indicator-mn fa-edit col-md-6" style="color: yellow!important;"></i></a><a href="' . $site_url .'/cards/' . $result['cardNo'] . '/deactivate"><i class="fa indicator-mn fa-trash col-md-6" style="color: red!important;"></i></a>' . '</td>';
+                                    echo '<td>' . $result->getObjectId() . '</td>';
+                                    echo '<td>' . $result->get('cardNo') . '</td>';
+                                    echo '<td>' . ($result->get('type') == 0 ? 'Supervisor' : 'Staff') . '</td>';
+                                    echo '<td>' . $result->get('name') . '</td>';
+                                    echo '<td>' . $result->get('createdAt') . '</td>';
+                                    echo '<td>' . '<a href="' . $site_url .'/icard/' . $result->get('cardNo') . '/modify"><i class="fa indicator-mn fa-edit col-md-6" style="color: yellow!important;"></i></a><a href="' . $site_url .'/cards/' . $result->get('cardNo') . '/deactivate"><i class="fa indicator-mn fa-trash col-md-6" style="color: red!important;"></i></a>' . '</td>';
                                     echo '</tr>';
                                 }
                                 ?>

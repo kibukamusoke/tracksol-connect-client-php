@@ -72,6 +72,11 @@ if(!isset($_SESSION['admin'])) {
     <!-- Sweet Alert
     ============================================ -->
     <link rel="stylesheet" href="<?php echo $site_url;?>/bower_components/bootstrap-sweetalert/dist/sweetalert.css">
+
+    <!-- dropzone CSS
+		============================================ -->
+    <link rel="stylesheet" href="<?php echo $site_url;?>/assets/css/dropzone.css">
+
     <!-- Notie
         ============================================ -->
     <link rel="stylesheet" type="text/css" href="<?php echo $site_url;?>/assets/css/notie.min.css">
