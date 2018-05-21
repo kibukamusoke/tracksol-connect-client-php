@@ -3,6 +3,7 @@ DROP PROCEDURE sp_picklist_data;
 CREATE PROCEDURE sp_picklist_data(OUT `_data` TEXT, IN `_collection_id` INT, IN _tmn_ref_id INTEGER)
   BEGIN
 
+    SET SESSION group_concat_max_len = 1000000;
     SET @location_rows := 0;
     SET @doc_counter := 0;
     SET @neg_counter := 0;

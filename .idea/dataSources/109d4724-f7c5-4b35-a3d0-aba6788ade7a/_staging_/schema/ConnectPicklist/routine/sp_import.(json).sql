@@ -99,8 +99,8 @@ CREATE PROCEDURE sp_import(IN `_DATA_ARRAY` JSON)
         LIMIT 1;
 
         IF COALESCE(_picklist_id, 0) = 0 THEN
-          INSERT INTO pkl_picklist (collection_id, code, description, form_idx,  status, updatedAt)
-          VALUES (@collection_id, @picklist_code, @picklist_code, _document_form_id, 0, current_timestamp);
+          INSERT INTO pkl_picklist (collection_id, code, description, form_idx,  status, updatedAt, type_id)
+          VALUES (@collection_id, @picklist_code, @picklist_code, _document_form_id, 0, current_timestamp, _picklist_type_id);
           SET _picklist_id = LAST_INSERT_ID();
         END IF;
 

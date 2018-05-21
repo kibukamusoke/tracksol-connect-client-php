@@ -16,7 +16,7 @@ if (isset($_GET['idx']) && $_GET['action']) { //destroy collection
     if ($_GET['action'] == 'deactivate') {
         $data = array('idx' => (int)$_GET['idx']);
         $data['status'] = 9;
-        $upsert = $__PICKLIST->upsertCollection($data);
+        $upsert = $__PICKLIST->upsertPicklist($data);
         if ($upsert['success']) {
             echo $__GB->DisplayError($upsert['message'], 'green');
             $success = $__GB->b64encode($upsert['message']);

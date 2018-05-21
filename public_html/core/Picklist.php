@@ -120,7 +120,7 @@ class Picklist
             }
         }
 
-        // else create new collection
+        // else create new picklist
         $insert = $this->__DB->insert($this->tables['picklist'], array('code' => $data['code'], 'form_idx' => $data['form_idx'], 'destination_location_id' => $data['destination_location_id'], 'description' => $data['description'], 'collection_id' => $data['collection_id'], 'type_id' => $data['type_id'], 'status' => $data['status']));
         if ($insert) {
             return array('success' => true, 'message' => 'Insert Successfull.');
