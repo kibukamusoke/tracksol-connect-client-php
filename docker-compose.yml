@@ -14,8 +14,8 @@ services:
     ports:
       - "3308:3306"
     environment:
-      MYSQL_ROOT_USERNAME: root
-      MYSQL_ROOT_PASSWORD: connect12366123
+      MYSQL_ROOT_USERNAME: <your_mysql_username>
+      MYSQL_ROOT_PASSWORD: <your_mysql_password>
     volumes:
       - ./db-data:/var/lib/mysql
       - ./mysql_8_conf.d:/etc/mysql/conf.d
